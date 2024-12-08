@@ -2,6 +2,10 @@
 
 Background parallax
 
+## Required components
+
+* [Core](https://github.com/WanSpi/SiteComponents/tree/main/Components/Core)
+
 ## HTML
 
 ```html
