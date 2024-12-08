@@ -15,3 +15,7 @@ Background parallax
 ```html
 <div class="image" style="background-image: url(image.jpg);" bparallax="reverse"></div>
 ```
+
+## Files
+
+* /BackgroundParallax.js
