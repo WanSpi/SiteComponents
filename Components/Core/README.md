@@ -2,6 +2,11 @@
 
 Core component in all JavaScript components
 
+## Parameters
+
+Core.WindowWidth
+Core.WindowHeight
+
 ## Methods
 
 Core.GetComponent(name)
@@ -26,3 +31,4 @@ ChangeDOM
 
 * /Core.js
 * /Events.js
+* /Window.js
