@@ -7,3 +7,4 @@
 ## Styles
 
 * [BackgroundParallax](https://github.com/WanSpi/SiteComponents/tree/main/Components/BackgroundParallax)
+* [LoadAnimation](https://github.com/WanSpi/SiteComponents/tree/main/Components/LoadAnimation)
