@@ -20,6 +20,10 @@ var Core = (function(){
 
     components[name] = component;
 
+    if (!(name in Core)) {
+      Core[name] = component;
+    }
+
     return true;
   };
 
