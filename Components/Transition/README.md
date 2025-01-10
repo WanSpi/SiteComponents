@@ -24,7 +24,7 @@ Core.Transition.Create({
 
 ## TransitionObject
 
-### Activate methods
+### Tick parameters
 
 ```JavaScript
 TransitionObject.Time; // [0, Duration]
