@@ -22,6 +22,19 @@ Core.Transition.Create({
 });
 ```
 
+```JavaScript
+new Core.Transition.TransitionObject({
+    Duration: 1000, // number | milisecunds | default 1000
+    TickEvent: function(value) {
+        // Code
+    },
+    EndEvent: function() {
+        // Code
+    },
+    CubicBezier: Core.CubicBezier.Ease // CubicBezierObject | default EaseInOut
+});
+```
+
 ## TransitionObject
 
 ### Tick parameters

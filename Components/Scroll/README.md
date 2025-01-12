@@ -13,6 +13,10 @@ Scroll
 Core.Scroll.Create(element);
 ```
 
+```JavaScript
+new Core.Scroll.ScrollObject(element);
+```
+
 ## ScrollObject
 
 ```JavaScript
