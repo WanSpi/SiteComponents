@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  padding: 10% 25%;
+}
+
+.box {
+  margin: 50px 0;
+}
+
+.header {
+  text-align: center;
+}
+
+.text {
+}
+
+.menu-block {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #FFF;
+  border-bottom: 1px solid;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  margin: 0;
+}
+
+.menu > li {
+  display: inline-block;
+}
+
+.menu > li > a {
+  display: inline-block;
+  padding: 20px 40px;
+  color: #000;
+  text-decoration: none;
+}
+
+.menu > li > a:hover {
+  text-decoration: underline;
+}
