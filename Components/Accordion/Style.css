@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  padding: 10% 25%;
+}
+
+p {
+  margin: 0;
+  padding-bottom: 15px;
+}
+p:last-child {
+  padding: 0;
+}
+
+.accordion {}
+
+.accordion-element {}
+.accordion-element.open {}
+
+.accordion-toggle {
+  width: 100%;
+  padding: 10px;
+}
+
+.accordion-box {
+  transition: .4s;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.accordion-padding {
+  padding: 20px;
+}
