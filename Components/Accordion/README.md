@@ -6,7 +6,9 @@ Accordion module
 
 * [Core](https://github.com/WanSpi/SiteComponents/tree/main/Components/Core)
 
-## HTML
+## Module
+
+### HTML
 
 ```html
 <div class="accordion" accordion>
@@ -20,6 +22,8 @@ Accordion module
   <!-- ForEnd -->
 </div>
 ```
+
+### CSS
 
 ```css
 .accordion-element {}
