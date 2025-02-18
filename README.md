@@ -16,3 +16,4 @@
 ## Modules
 
 * [Accordion](https://github.com/WanSpi/SiteComponents/tree/main/Components/Accordion)
+* [Tabs](https://github.com/WanSpi/SiteComponents/tree/main/Components/Tabs)
