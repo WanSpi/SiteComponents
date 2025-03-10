@@ -110,7 +110,7 @@ String.toCamelCase()
 
 ## Files
 
+* /Helpers/Prototypes.js
 * /Core.js
 * /Events.js
 * /Window.js
-* /Helpers/Prototypes.js
