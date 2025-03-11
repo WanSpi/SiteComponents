@@ -52,9 +52,9 @@ Core.Events = (function(){
     }
   };
 
-  EventObject.prototype.Trigger = function(eventObject) {
+  EventObject.prototype.Trigger = function(eventData) {
     for (var i = 0; i !== this.Events.length; i++) {
-      this.Events[i].call(window, eventObject);
+      this.Events[i].call(window, eventData);
     }
   };
 
@@ -74,6 +74,41 @@ Core.Events = (function(){
   EventObject.prototype.RemoveListener = function(callback) {
     if (this.Events.remove(callback) && this.RemoveCallback) {
       this.RemoveCallback(callback);
+    }
+  };
+
+  /* EventGroup */
+
+  var EventGroup = function() {
+    this.EventObjects = {};
+  };
+
+  EventGroup.prototype.EventObjects = null;
+
+  EventGroup.prototype.SetEventObject = function(type, eventObject) {
+    if (eventObject === null) {
+      if (type in this.EventObjects) {
+        delete this.EventObjects[type];
+      }
+    } else if (eventObject instanceof EventObject) {
+      this.EventObjects[type] = eventObject;
+    }
+  };
+
+  EventGroup.prototype.Trigger = function(type, eventData) {
+    if (type in this.EventObjects) {
+      this.EventObjects[type].Trigger(eventData);
+    }
+  };
+
+  EventGroup.prototype.AddListener = function(type, callback) {
+    if (type in this.EventObjects) {
+      this.EventObjects[type].AddListener(callback);
+    }
+  };
+  EventGroup.prototype.RemoveListener = function(type, callback) {
+    if (type in this.EventObjects) {
+      this.EventObjects[type].RemoveListener(callback);
     }
   };
 
@@ -119,6 +154,17 @@ Core.Events = (function(){
       }
 
       return eventObject;
+    },
+    CreateEventGroup: function(eventObjects){
+      var eventGroup = new EventGroup();
+
+      if (typeof eventObjects === 'object' && eventObjects !== null) {
+        for (var type in eventObjects) {
+          eventGroup.SetEventObject(type, eventObjects[type]);
+        }
+      }
+
+      return eventGroup;
     }
   };
 })();

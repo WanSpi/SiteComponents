@@ -24,6 +24,7 @@ Core.Events.AddListener(type, callback)
 Core.Events.RemoveListener(type, callback)
 Core.Events.AddEventType(type, config)
 Core.Events.CreateEventObject(config)
+Core.Events.CreateEventGroup(eventObjects)
 ```
 
 ## Events
@@ -39,10 +40,19 @@ ChangeDOM
 ```JavaScript
 EventObject.SetAddCallback(callback); // callback - function
 EventObject.SetRemoveCallback(callback); // callback - function
-EventObject.Trigger(eventObject); // eventObject - any
+EventObject.Trigger(eventData); // eventData - any
 EventObject.GetCount();
 EventObject.AddListener(callback); // callback - function
 EventObject.RemoveListener(callback); // callback - function
+```
+
+## EventGroup
+
+```JavaScript
+EventGroup.SetEventObject(type, eventObject);
+EventGroup.Trigger(type, eventData);
+EventGroup.AddListener(type, callback);
+EventGroup.RemoveListener(type, callback);
 ```
 
 ## Prototypes
