@@ -1,77 +1,124 @@
 Core.Events = (function(){
-  var events = {};
-  var eventTypes = {};
+  var eventObjects = {};
 
   /* Logic */
 
-  var getEventArray = function(type) {
-    if (!(type in events)) {
-      events[type] = [];
-    }
-
-    return events[type];
-  };
-
-  var getEventTypeArray = function(type) {
-    if (!(type in eventTypes)) {
-      eventTypes[type] = [];
-    }
-
-    return eventTypes[type];
-  };
-
   var addListener = function(type, callback) {
-    getEventArray(type).push(callback);
+    if (!(type in eventObjects)) {
+      eventObjects[type] = [];
+    }
 
-    var eventTypeArray = getEventTypeArray(type);
-    for (var i = 0; i !== eventTypeArray.length; i++) {
-      if ('AddCallBack' in eventTypeArray[i]) {
-        eventTypeArray[i].AddCallBack(callback);
-      }
+    if (eventObjects[type] instanceof EventObject) {
+      eventObjects[type].AddListener(callback);
+    } else {
+      eventObjects[type].push(callback);
     }
   };
 
   var removeListener = function(type, callback) {
-    var eventArray = getEventArray(type);
-
-    var index = eventArray.indexOf(callback);
-    if (index === -1) {
-      return;
+    if (!(type in eventObjects)) {
+      eventObjects[type] = [];
     }
 
-    eventArray.removeIndex(index);
-  };
-
-  var callEvent = function(type, eventObject) {
-    var eventArray = getEventArray(type);
-
-    for (var i = 0; i !== eventArray.length; i++) {
-      eventArray[i].call(window, eventObject);
+    if (eventObjects[type] instanceof EventObject) {
+      eventObjects[type].RemoveListener(callback);
+    } else {
+      eventObjects[type].remove(callback);
     }
-  };
-
-  var getCount = function(type) {
-    return getEventArray(type).length;
   };
 
   Core.AddListener = addListener;
   Core.RemoveListener = removeListener;
 
+  /* EventObject */
+
+  var EventObject = function() {
+    this.Events = [];
+  };
+
+  EventObject.prototype.Events = null;
+
+  EventObject.prototype.AddCallback    = null;
+  EventObject.prototype.RemoveCallback = null;
+
+  EventObject.prototype.SetAddCallback = function(callback) {
+    if (callback === null || typeof callback === 'function') {
+      this.AddCallback = callback;
+    }
+  };
+  EventObject.prototype.SetRemoveCallback = function(callback) {
+    if (callback === null || typeof callback === 'function') {
+      this.RemoveCallback = callback;
+    }
+  };
+
+  EventObject.prototype.Trigger = function(eventObject) {
+    for (var i = 0; i !== this.Events.length; i++) {
+      this.Events[i].call(window, eventObject);
+    }
+  };
+
+  EventObject.prototype.GetCount = function() {
+    return this.Events.length;
+  };
+
+  EventObject.prototype.AddListener = function(callback) {
+    if (typeof callback === 'function' && !this.Events.contains(callback)) {
+      this.Events.push(callback);
+
+      if (this.AddCallback) {
+        this.AddCallback(callback);
+      }
+    }
+  };
+  EventObject.prototype.RemoveListener = function(callback) {
+    if (this.Events.remove(callback) && this.RemoveCallback) {
+      this.RemoveCallback(callback);
+    }
+  };
+
+  /* Global methods */
+
   return {
     AddListener: addListener,
     RemoveListener: removeListener,
-    AddEventType: function(type, config){ // config -> AddCallBack : function
-      if (typeof settings !== 'object') {
-        settings = {};
+    AddEventType: function(type, config){
+      var eventObject = this.CreateEventObject(config);
+
+      if (type in eventObjects) {
+        if (eventObjects[type] instanceof EventObject) {
+          console.error('[Events][AddEventType] Type \'' + type + '\' already exists');
+        } else {
+          for (var i = 0; i !== eventObjects[type].length; i++) {
+            eventObject.AddListener(
+              eventObjects[type][i]
+            );
+          }
+
+          eventObjects[type] = eventObject;
+        }
+      } else {
+        eventObjects[type] = eventObject;
       }
 
-      var eventTypeArray = getEventTypeArray(type);
-      eventTypeArray.push(settings);
+      return eventObject;
+    },
+    CreateEventObject: function(config){
+      if (typeof config !== 'object') {
+        config = {};
+      }
 
-      return {
-        CallEvent: callEvent.bind(window, type),
-        GetCount: getCount.bind(window, type)
-      };
+      var eventObject = new EventObject();
+
+      if ('AddCallback' in config) {
+        eventObject.SetAddCallback(config.AddCallback);
+      }
+
+      if ('RemoveCallback' in config) {
+        eventObject.SetRemoveCallback(config.RemoveCallback);
+      }
+
+      return eventObject;
     }
   };
 })();
@@ -93,7 +140,7 @@ Core.Events = (function(){
   };
 
   var awakeEventObject = Core.Events.AddEventType('Awake', {
-    AddCallBack: function(callback){
+    AddCallback: function(callback){
       if (awakeIsCall) {
         awakeEventCount++;
 
@@ -106,7 +153,7 @@ Core.Events = (function(){
 
   var startIsCall = false;
   var startEventObject = Core.Events.AddEventType('Start', {
-    AddCallBack: function(callback){
+    AddCallback: function(callback){
       if (startIsCall) {
         callback();
       }
@@ -115,7 +162,7 @@ Core.Events = (function(){
 
   var callStartEvents = function() {
     startIsCall = true;
-    startEventObject.CallEvent();
+    startEventObject.Trigger();
   };
 
   window.addEventListener('load', function(){
@@ -123,7 +170,7 @@ Core.Events = (function(){
     awakeEventCount = awakeEventObject.GetCount();
 
     if (awakeEventCount) {
-      awakeEventObject.CallEvent({
+      awakeEventObject.Trigger({
         CallBackEnd: awakeCallBackEnd
       });
     } else {
@@ -139,7 +186,7 @@ Core.Events = (function(){
 
   var changeIsCall = false;
   var changeEventObject = Core.Events.AddEventType('ChangeDOM', {
-    AddCallBack: function(callback){
+    AddCallback: function(callback){
       if (changeIsCall) {
         callback({
           Target: document.body
@@ -151,7 +198,7 @@ Core.Events = (function(){
   Core.AddListener('Start', function(){
     changeIsCall = true;
 
-    changeEventObject.CallEvent({
+    changeEventObject.Trigger({
       Target: document.body
     });
   });
@@ -161,7 +208,7 @@ Core.Events = (function(){
       return console.error('[ParseDOM] Not element');
     }
 
-    changeEventObject.CallEvent({
+    changeEventObject.Trigger({
       Target: element
     });
   };
