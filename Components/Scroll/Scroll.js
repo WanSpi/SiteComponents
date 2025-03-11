@@ -145,6 +145,8 @@
     });
   };
 
+  /* Component */
+
   Core.AddComponent('Scroll', {
     ScrollObject: ScrollObject,
     Create: function(element){

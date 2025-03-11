@@ -104,6 +104,8 @@
     this.Value = 0;
   };
 
+  /* Component */
+
   Core.AddComponent('Transition', {
     TransitionObject: TransitionObject,
     /*

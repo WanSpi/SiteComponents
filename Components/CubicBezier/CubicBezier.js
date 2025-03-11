@@ -114,6 +114,8 @@
     return calcBezier(getTForX(time, this.x1, this.x2, this.sampleValues), this.y1, this.y2);
   };
 
+  /* Component */
+
   Core.AddComponent('CubicBezier', {
     Ease:      new CubicBezierObject(.25, .1, .25, 1),
     EaseIn:    new CubicBezierObject(.42, 0, 1, 1),
