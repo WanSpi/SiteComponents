@@ -23,6 +23,7 @@ Core.ParseDOM(element)
 Core.Events.AddListener(type, callback)
 Core.Events.RemoveListener(type, callback)
 Core.Events.AddEventType(type, config)
+Core.Events.CreateEventObject(config)
 ```
 
 ## Events
@@ -31,6 +32,17 @@ Core.Events.AddEventType(type, config)
 Awake
 Start
 ChangeDOM
+```
+
+## EventObject
+
+```JavaScript
+EventObject.SetAddCallback(callback); // callback - function
+EventObject.SetRemoveCallback(callback); // callback - function
+EventObject.Trigger(eventObject); // eventObject - any
+EventObject.GetCount();
+EventObject.AddListener(callback); // callback - function
+EventObject.RemoveListener(callback); // callback - function
 ```
 
 ## Prototypes
