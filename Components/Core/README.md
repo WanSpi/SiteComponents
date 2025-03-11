@@ -24,7 +24,7 @@ Core.Events.AddListener(type, callback)
 Core.Events.RemoveListener(type, callback)
 Core.Events.AddEventType(type, config)
 Core.Events.CreateEventObject(config)
-Core.Events.CreateEventGroup(eventObjects)
+Core.Events.CreateEventGroup(config)
 ```
 
 ## Events
@@ -53,6 +53,15 @@ EventGroup.SetEventObject(type, eventObject);
 EventGroup.Trigger(type, eventData);
 EventGroup.AddListener(type, callback);
 EventGroup.RemoveListener(type, callback);
+```
+
+## Functions
+
+```JavaScript
+Random(min, max);
+
+IsObject(ob);
+IsObject(key, ob);
 ```
 
 ## Prototypes
@@ -132,6 +141,7 @@ String.toCamelCase()
 
 ## Files
 
+* /Helpers/Functions.js
 * /Helpers/Prototypes.js
 * /Core.js
 * /Events.js

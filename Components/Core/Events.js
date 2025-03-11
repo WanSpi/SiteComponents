@@ -155,12 +155,21 @@ Core.Events = (function(){
 
       return eventObject;
     },
-    CreateEventGroup: function(eventObjects){
+    CreateEventGroup: function(config){
+      if (typeof config !== 'object') {
+        config = {};
+      }
+
       var eventGroup = new EventGroup();
 
-      if (typeof eventObjects === 'object' && eventObjects !== null) {
-        for (var type in eventObjects) {
-          eventGroup.SetEventObject(type, eventObjects[type]);
+      if (IsObject('Self', config)) {
+        config.Self.AddListener = eventGroup.AddListener.bind(eventGroup);
+        config.Self.RemoveListener = eventGroup.RemoveListener.bind(eventGroup);
+      }
+
+      if (IsObject('EventObjects', config)) {
+        for (var type in config.EventObjects) {
+          eventGroup.SetEventObject(type, config.EventObjects[type]);
         }
       }
 
