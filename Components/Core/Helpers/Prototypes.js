@@ -51,6 +51,10 @@
     return cl.search(' ' + className + ' ') !== -1;
   });
 
+  setPrototype(Element, 'includesClass', function(className){
+    return this.containsClass(className);
+  });
+
   /* Array */
 
   setPrototype(Array, 'insert', function(index, el){
@@ -83,8 +87,28 @@
     }
   });
 
+  setPrototype(Array, 'shiftArray', function(len){
+    var arr = [];
+
+    for (var i = 0; i < len && this.length; i++) {
+      arr.push(this.shift());
+    }
+
+    return arr;
+  });
+
+  setPrototype(Array, 'popArray', function(len){
+    var arr = [];
+
+    for (var i = 0; i < len && this.length; i++) {
+      arr.unshift(this.pop());
+    }
+
+    return arr;
+  });
+
   setPrototype(Array, 'contains', function(value){
-    return this.indexOf(value) === -1 ? false : true;
+    return this.includes(value);
   });
 
   setPrototype(Array, 'removeIndex', function(index){
@@ -210,23 +234,32 @@
     }
   });
 
-  setPrototype(NodeList, 'removeElements', function(){
+  var nodeListRemoveElements = function() {
     for (var i = 0; i !== this.length; i++) {
       this[i].removeElement();
     }
-  });
+  };
 
-  setPrototype(NodeList, 'addEventListener', function(type, listener){
+  setPrototype(NodeList, 'removeElements', nodeListRemoveElements);
+  setPrototype(HTMLCollection, 'removeElements', nodeListRemoveElements);
+
+  var addEventListener = function(type, listener) {
     for (var i = 0; i !== this.length; i++) {
       this[i].addEventListener(type, listener);
     }
-  });
+  };
 
-  setPrototype(NodeList, 'removeEventListener', function(type, listener){
+  setPrototype(NodeList, 'addEventListener', addEventListener);
+  setPrototype(HTMLCollection, 'addEventListener', addEventListener);
+
+  var removeEventListener = function(type, listener) {
     for (var i = 0; i !== this.length; i++) {
       this[i].removeEventListener(type, listener);
     }
-  });
+  };
+
+  setPrototype(NodeList, 'removeEventListener', removeEventListener);
+  setPrototype(HTMLCollection, 'removeEventListener', removeEventListener);
 
   /* Form data */
 
