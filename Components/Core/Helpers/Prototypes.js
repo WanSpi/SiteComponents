@@ -152,6 +152,20 @@
   setPrototype(NodeList, 'indexOf', nodeIndexOf);
   setPrototype(HTMLCollection, 'indexOf', nodeIndexOf);
 
+  var listContains = function(item) {
+    if (this.indexOf(item) === -1) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  setPrototype(NodeList, 'contains', listContains);
+  setPrototype(NodeList, 'includes', listContains);
+
+  setPrototype(HTMLCollection, 'contains', listContains);
+  setPrototype(HTMLCollection, 'includes', listContains);
+
   setPrototype(Element, 'getIndex', function(){
     return this.parentNode.children.indexOf(this);
   });
@@ -361,4 +375,96 @@
       })
       .join('');
   });
+
+  /* Child listener  */
+
+  (function(){
+    var elementObjects = [];
+
+    // Logic
+
+    var getElementObject = function(el) {
+      for (var i = 0; i !== elementObjects.length; i++) {
+        if (elementObjects[i].element === el) {
+          return elementObjects[i];
+        }
+      }
+
+      var elementObject = {
+        element:   el,
+        listeners: [],
+      };
+
+      elementObjects.push(elementObject);
+
+      return elementObject;
+    };
+
+    var getListenerObject = function(elementObject, selector, type, callback) {
+      for (var i = 0; i !== elementObject.listeners.length; i++) {
+        if (
+          elementObject.listeners[i].type     === type     &&
+          elementObject.listeners[i].selector === selector &&
+          elementObject.listeners[i].callback === callback
+        ) {
+          return elementObject.listeners[i];
+        }
+      }
+
+      return null;
+    };
+
+    var createListenerObject = function(selector, type, callback) {
+      return {
+        type:     type,
+        selector: selector,
+        callback: callback,
+        listener: function(ev){
+          var els = this.querySelectorAll(selector);
+          var target = ev.target;
+
+          while (target) {
+            if (els.contains(target)) {
+              return callback.call(target, ev);
+            }
+
+            target = target.parentNode;
+          }
+        }
+      };
+    };
+
+    // Methods
+
+    var addChildListener = function(selector, type, callback) {
+      var elementObject  = getElementObject(this);
+      var listenerObject = getListenerObject(elementObject, selector, type, callback);
+
+      if (!listenerObject) {
+        listenerObject = createListenerObject(selector, type, callback);
+        elementObject.listeners.push(listenerObject);
+
+        this.addEventListener(type, listenerObject.listener);
+      }
+    };
+
+    var removeChildListener = function(selector, type, callback) {
+      var elementObject  = getElementObject(this);
+      var listenerObject = getListenerObject(elementObject, selector, type, callback);
+
+      if (listenerObject) {
+        elementObject.listeners.remove(listenerObject);
+
+        this.removeEventListener(type, listenerObject.listener);
+      }
+    };
+
+    // Set prototypes
+
+    setPrototype(Element,  'addChildListener', addChildListener);
+    setPrototype(Document, 'addChildListener', addChildListener);
+
+    setPrototype(Element,  'removeChildListener', removeChildListener);
+    setPrototype(Document, 'removeChildListener', removeChildListener);
+  })();
 })();
