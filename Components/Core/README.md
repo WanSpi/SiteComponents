@@ -97,6 +97,12 @@ HTMLCollection.forEach(callback, thisArg)
 NodeList.indexOf(item)
 HTMLCollection.indexOf(item)
 
+NodeList.contains(item)
+NodeList.includes(item)
+
+HTMLCollection.contains(item)
+HTMLCollection.includes(item)
+
 Element.getIndex()
 ```
 
@@ -137,6 +143,16 @@ Number.getPrice()
 
 ```JavaScript
 String.toCamelCase()
+```
+
+#### Child listener
+
+```JavaScript
+Element.addChildListener(selector, type, callback)
+Document.addChildListener(selector, type, callback)
+
+Element.removeChildListener(selector, type, callback)
+Document.removeChildListener(selector, type, callback)
 ```
 
 ## Files
