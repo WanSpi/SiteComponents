@@ -173,7 +173,9 @@
   /* Object */
 
   var objectClone = function(obj) {
-    if (obj instanceof Date) {
+    if (obj instanceof Node) {
+      return obj.cloneNode(true);
+    } else if (obj instanceof Date) {
       return new Date(obj);
     } else if (obj instanceof Array) {
       var newArr = [];

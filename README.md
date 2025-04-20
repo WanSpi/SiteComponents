@@ -17,3 +17,4 @@
 
 * [Accordion](https://github.com/WanSpi/SiteComponents/tree/main/Components/Accordion)
 * [Tabs](https://github.com/WanSpi/SiteComponents/tree/main/Components/Tabs)
+* [InfiniteGallery](https://github.com/WanSpi/SiteComponents/tree/main/Components/InfiniteGallery)

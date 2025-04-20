@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+}
+
+.infinite_gallery-block {
+  margin: 200px 0 0;
+}
+
+.infinite_gallery {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 0;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.infinite_gallery-child {
+  padding: 0 20px;
+}
+
+.infinite_gallery-image {
+  height: 80px;
+  vertical-align: top;
+}
