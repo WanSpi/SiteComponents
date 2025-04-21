@@ -1,0 +1,22 @@
+.counter-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.counter-box {
+  border: 1px solid #9b9b9b;
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  text-align: center;
+  line-height: 160px;
+  margin: 0 20px;
+}
+
+.counter {
+  font-size: 64px;
+}

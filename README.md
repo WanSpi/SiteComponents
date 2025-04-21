@@ -11,6 +11,7 @@
 ## Styles
 
 * [BackgroundParallax](https://github.com/WanSpi/SiteComponents/tree/main/Components/BackgroundParallax)
+* [Counter](https://github.com/WanSpi/SiteComponents/tree/main/Components/Counter)
 * [LoadAnimation](https://github.com/WanSpi/SiteComponents/tree/main/Components/LoadAnimation)
 * [LinkAnchor](https://github.com/WanSpi/SiteComponents/tree/main/Components/LinkAnchor)
 
