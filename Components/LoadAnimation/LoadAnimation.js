@@ -88,10 +88,10 @@
     this.Type = this.Element.getAttribute('lanim').toString();
 
     switch (this.Type) {
-      case 'up':     this.Element.style.transform = 'translate(0, ' + transformTranslate + 'px)';  break;
-      case 'right':  this.Element.style.transform = 'translate(-' + transformTranslate + 'px, 0)'; break;
-      case 'bottom': this.Element.style.transform = 'translate(0, -' + transformTranslate + 'px)'; break;
-      case 'left':   this.Element.style.transform = 'translate(' + transformTranslate + 'px, 0)';  break;
+      case 'up':    this.Element.style.transform = 'translate(0, ' + transformTranslate + 'px)';  break;
+      case 'right': this.Element.style.transform = 'translate(-' + transformTranslate + 'px, 0)'; break;
+      case 'down':  this.Element.style.transform = 'translate(0, -' + transformTranslate + 'px)'; break;
+      case 'left':  this.Element.style.transform = 'translate(' + transformTranslate + 'px, 0)';  break;
     }
 
     this.Element.style.opacity = '0';

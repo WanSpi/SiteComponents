@@ -13,7 +13,7 @@ Load animation
 <div lanim>Element</div>
 <div lanim="up">Element</div>
 <div lanim="right">Element</div>
-<div lanim="bottom">Element</div>
+<div lanim="down">Element</div>
 <div lanim="left">Element</div>
 ```
 
