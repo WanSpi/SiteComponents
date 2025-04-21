@@ -5,6 +5,7 @@ Load animation
 ## Required components
 
 * [Core](https://github.com/WanSpi/SiteComponents/tree/main/Components/Core)
+* [ViewportWatcher](https://github.com/WanSpi/SiteComponents/tree/main/Components/ViewportWatcher)
 
 ## HTML
 

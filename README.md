@@ -6,6 +6,7 @@
 * [CubicBezier](https://github.com/WanSpi/SiteComponents/tree/main/Components/CubicBezier)
 * [Transition](https://github.com/WanSpi/SiteComponents/tree/main/Components/Transition)
 * [Scroll](https://github.com/WanSpi/SiteComponents/tree/main/Components/Scroll)
+* [ViewportWatcher](https://github.com/WanSpi/SiteComponents/tree/main/Components/ViewportWatcher)
 
 ## Styles
 

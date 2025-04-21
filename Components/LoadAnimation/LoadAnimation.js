@@ -1,11 +1,13 @@
 (function(){
-  var watchObjects = [];
   var groupObjects = [];
 
   var transformTranslate = 20;
 
   var waitInterval = 100;
   var transitionDuration = 1000;
+
+  var showingCount = 0;
+  var showingTime  = 0;
 
   /* Logic */
 
@@ -31,6 +33,25 @@
     return parent;
   };
 
+  var getExecuteDelay = function() {
+    var timeNow = Date.now();
+
+    if (timeNow - showingTime > showingCount * waitInterval) {
+      showingCount = 0;
+    }
+
+    if (showingCount === 0) {
+      showingCount++;
+      showingTime = timeNow;
+
+      return 0;
+    } else {
+      showingCount++;
+
+      return showingCount * waitInterval - (timeNow - showingTime);
+    }
+  };
+
   var appendParent = function(elObject) {
     if (elObject instanceof LoadAnimationGroup) {
       groupObjects.push(elObject);
@@ -45,7 +66,18 @@
         elObject.Execute();
       }
     } else {
-      watchObjects.push(elObject);
+      Core.ViewportWatcher
+        .SingleTrigger(elObject.Element, function(){
+          var executeDelay = getExecuteDelay();
+
+          if (executeDelay === 0) {
+            elObject.Execute();
+          } else {
+            setTimeout(function(){
+              elObject.Execute();
+            }, executeDelay);
+          }
+        });
     }
   };
 
@@ -90,10 +122,6 @@
     this.Executed = true;
   };
 
-  LoadAnimationElement.prototype.GetRect = function() {
-    return this.Element.getBoundingClientRect();
-  };
-
   /* LoadAnimationGroup */
 
   var LoadAnimationGroup = function(el) {
@@ -123,52 +151,6 @@
     this.Executed = true;
   };
 
-  LoadAnimationGroup.prototype.GetRect = function() {
-    return this.Element.getBoundingClientRect();
-  };
-
-  /* Watcher */
-
-  var watcherID = undefined;
-  var watcherFun = function() {
-    for (var i = 0; i !== watchObjects.length; i++) {
-      var rect = watchObjects[i].GetRect();
-
-      if ((rect.top + 50 < Core.WindowHeight && rect.bottom > 0) || (rect.bottom > 50 && rect.top < 0)) {
-        watchObjects[i].Execute();
-        watchObjects.removeIndex(i);
-
-        stopWatch();
-
-        if (watchObjects.length !== 0) {
-          setTimeout(startWatch, waitInterval);
-        }
-
-        return;
-      }
-    }
-  };
-
-  var startWatch = function() {
-    if (watcherID !== undefined || watchObjects.length === 0) {
-      return false;
-    }
-
-    watcherID = setInterval(watcherFun, 16);
-
-    return true;
-  };
-  var stopWatch = function() {
-    if (watcherID === undefined) {
-      return false;
-    }
-
-    clearInterval(watcherID);
-    watcherID = undefined;
-
-    return true;
-  };
-
   /* ChangeDOM */
 
   Core.AddListener('ChangeDOM', function(e){
@@ -186,7 +168,5 @@
         new LoadAnimationElement(elements[i])
       );
     }
-
-    startWatch();
   });
 })();
