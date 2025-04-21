@@ -102,7 +102,7 @@
   LoadAnimationElement.prototype.Element = null;
   LoadAnimationElement.prototype.Executed = false;
 
-  LoadAnimationElement.prototype.Parent = null
+  LoadAnimationElement.prototype.Parent = null;
 
   LoadAnimationElement.prototype.Execute = function() {
     if (this.Executed) {
