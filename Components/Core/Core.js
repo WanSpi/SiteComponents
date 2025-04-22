@@ -3,6 +3,36 @@ var Core = (function(){
 
   /* Components */
 
+  var getElementConfig = function(name, el) {
+    var value = '';
+    var config = {};
+
+    for (var i = 0; i !== el.attributes.length; i++) {
+      if (el.attributes[i].nodeName === name) {
+        value = el.attributes[i].nodeValue;
+      } else {
+        var match = el.attributes[i].nodeName.match('^' + name + '\\-([\\s\\S]+)$');
+
+        if (match) {
+          config[match[1]] = el.attributes[i].nodeValue;
+        } else {
+          continue;
+        }
+      }
+
+      el.removeAttribute(
+        el.attributes[i].nodeName
+      );
+
+      i--;
+    }
+
+    return {
+      Value: value,
+      Config: config
+    };
+  };
+
   var getComponent = function(name) {
     if (name in components) {
       return components[name];
@@ -31,6 +61,7 @@ var Core = (function(){
 
   return {
     GetComponent: getComponent,
-    AddComponent: addComponent
+    AddComponent: addComponent,
+    GetElementConfig: getElementConfig,
   };
 })();
