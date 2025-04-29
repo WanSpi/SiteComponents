@@ -14,7 +14,10 @@
   };
 
   var checkChilds = function(scrollLeft) {
-    while (scrollLeft > this.Element.children[0].offsetWidth) {
+    while (
+      this.Element.children.length &&
+      scrollLeft > this.Element.children[0].offsetWidth
+    ) {
       scrollLeft -= this.Element.children[0].offsetWidth;
       this.Element.children[0].removeElement();
     }
