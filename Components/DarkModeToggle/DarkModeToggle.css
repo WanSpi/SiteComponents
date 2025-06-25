@@ -1,0 +1,171 @@
+.dm_toggle-block {
+  width: 60px;
+  height: 30px;
+  display: inline-block;
+  position: relative;
+}
+.dm_toggle-input {
+  display: none;
+}
+.dm_toggle {
+  width: 60px;
+  height: 30px;
+  position: relative;
+  background: #3379B2;
+  border-radius: 15px;
+  transition: .4s all ease;
+  overflow: hidden;
+}
+.dm_toggle-input:checked + .dm_toggle {
+  background: #171F2D;
+}
+.dm_toggle-shadow {
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+  position: absolute;
+  z-index: 4;
+  transition: .4s all ease;
+  box-shadow: inset 1px 1px 3px 0px #3379B2;
+}
+.dm_toggle-input:checked + .dm_toggle .dm_toggle-shadow {
+  box-shadow: inset 1px 1px 3px 0px #171F2D;
+}
+.dm_toggle-background {
+  position: absolute;
+  z-index: 1;
+  transition: .4s all ease;
+  top: -30px;
+  width: 60px;
+  height: 60px;
+}
+.dm_toggle-input:checked + .dm_toggle .dm_toggle-background {
+  top: 0;
+}
+.dm_toggle-stars {
+  width: 60px;
+  height: 30px;
+  position: relative;
+}
+.dm_toggle-star {
+  position: absolute;
+  transform-origin: center;
+}
+.dm_toggle-star:before {
+  content: '';
+  position: absolute;
+  background: #FFF;
+  width: 10px;
+  height: 11.5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg) skewX(22.5deg) skewY(22.5deg);
+}
+.dm_toggle-star:after {
+  content: '';
+  position: absolute;
+  background: #FFF;
+  width: 10px;
+  height: 11.5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg) skewX(22.5deg) skewY(22.5deg);
+}
+.dm_toggle-clouds {
+  width: 60px;
+  height: 30px;
+  position: relative;
+}
+.dm_toggle-cloud {
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 30px;
+  position: absolute;
+  overflow: hidden;
+}
+.dm_toggle-cloud-1 {
+  z-index: 1;
+}
+.dm_toggle-cloud-2 {
+  z-index: 2;
+}
+.dm_toggle-cloud-circle {
+  border-radius: 50%;
+  position: absolute;
+}
+.dm_toggle-cloud-1 .dm_toggle-cloud-circle {
+  background: #B2CBE0;
+}
+.dm_toggle-cloud-2 .dm_toggle-cloud-circle {
+  background: #FFF;
+}
+.dm_toggle-lights {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: .4s all ease;
+  z-index: 2;
+}
+.dm_toggle-input:checked + .dm_toggle .dm_toggle-lights {
+  left: 33px;
+}
+.dm_toggle-light {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background: rgba(255, 255, 255, .1);
+  border-radius: 50%;
+}
+.dm_toggle-circle {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: .4s all ease;
+  z-index: 3;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+}
+.dm_toggle-input:checked + .dm_toggle .dm_toggle-circle {
+  left: 33px;
+}
+.dm_toggle-circle-sun {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background: #EFC226;
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, .4), inset 1px 1px 1px rgba(255, 255, 255, .5);
+  z-index: 1;
+}
+.dm_toggle-circle-moon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 0;
+  left: 24px;
+  border-radius: 50%;
+  background: #C3C6D1;
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, .4), inset 1px 1px 1px rgba(255, 255, 255, .5);
+  transition: .4s all ease;
+  z-index: 2;
+}
+.dm_toggle-input:checked + .dm_toggle .dm_toggle-circle-moon {
+  left: 0;
+}
+.dm_toggle-circle-crater {
+  background: #96A0B2;
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 2px rgb(132, 141, 157, .6);
+}
