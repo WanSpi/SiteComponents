@@ -6,15 +6,19 @@
 * [CubicBezier](https://github.com/WanSpi/SiteComponents/tree/main/Components/CubicBezier)
 * [Transition](https://github.com/WanSpi/SiteComponents/tree/main/Components/Transition)
 * [Scroll](https://github.com/WanSpi/SiteComponents/tree/main/Components/Scroll)
+* [Swiper](https://github.com/WanSpi/SiteComponents/tree/main/Components/Swiper)
 * [ViewportWatcher](https://github.com/WanSpi/SiteComponents/tree/main/Components/ViewportWatcher)
 
 ## Styles
 
 * [BackgroundParallax](https://github.com/WanSpi/SiteComponents/tree/main/Components/BackgroundParallax)
-* [DarkModeToggle](https://github.com/WanSpi/SiteComponents/tree/main/Components/DarkModeToggle)
 * [Counter](https://github.com/WanSpi/SiteComponents/tree/main/Components/Counter)
 * [LoadAnimation](https://github.com/WanSpi/SiteComponents/tree/main/Components/LoadAnimation)
 * [LinkAnchor](https://github.com/WanSpi/SiteComponents/tree/main/Components/LinkAnchor)
+
+## Elements
+
+* [DarkModeToggle](https://github.com/WanSpi/SiteComponents/tree/main/Components/DarkModeToggle)
 
 ## Modules
 
