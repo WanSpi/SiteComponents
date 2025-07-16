@@ -42,6 +42,22 @@
     }
   });
 
+  setPrototype(Element, 'toggleClass', function(className){
+    if (typeof this.classList === 'object' && 'toggle' in this.classList) {
+      return this.classList.toggle(className);
+    }
+
+    if (this.containsClass(className)) {
+      this.removeClass(className);
+
+      return false;
+    } else {
+      this.addClass(className);
+
+      return true;
+    }
+  });
+
   setPrototype(Element, 'containsClass', function(className){
     if (typeof this.classList === 'object' && 'contains' in this.classList) {
       return this.classList.contains(className);
