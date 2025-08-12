@@ -21,8 +21,16 @@
     var self = this;
 
     if (e.type === 'touchstart') {
+      if (!self.Touch) {
+        return;
+      }
+
       var type = 'Touch';
     } else {
+      if (!self.Mouse) {
+        return;
+      }
+
       var type = 'Mouse';
     }
 
@@ -116,15 +124,22 @@
   SwiperObject.prototype.Element    = null;
   SwiperObject.prototype.EventGroup = null;
 
+  SwiperObject.prototype.Touch = true;
+  SwiperObject.prototype.Mouse = true;
+
   /* Component */
 
   Core.AddComponent('Swiper', {
     SwiperObject: SwiperObject,
     /*
       Target:     Element
+
       StartEvent: function
       MoveEvent:  function
       EndEvent:   function
+
+      Touch:      bool | true
+      Mouse:      bool | true
     */
     Create: function(config){
       if (!IsObject(config)) {
@@ -148,6 +163,14 @@
 
       if ('EndEvent' in config) {
         swiperObject.AddListener('end', config.EndEvent);
+      }
+
+      if ('Touch' in config) {
+        swiperObject.Touch = !!config.Touch;
+      }
+
+      if ('Mouse' in config) {
+        swiperObject.Mouse = !!config.Mouse;
       }
 
       return swiperObject;
