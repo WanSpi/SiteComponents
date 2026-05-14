@@ -47,7 +47,7 @@
   Core.AddListener('ChangeDOM', function(e){
     var els = e.Target.querySelectorAll('[bparallax]');
 
-    for (var i = 0; i !== els.length; i++) {
+    for (let i = els.length - 1; i !== -1; i--) {
       watchObjects.push(
         new BackgroundParallax(els[i])
       );

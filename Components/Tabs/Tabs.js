@@ -113,7 +113,7 @@
   Core.AddListener('ChangeDOM', function(e){
     var elements = e.Target.querySelectorAll('[tabs]');
 
-    for (var i = 0; i !== elements.length; i++) {
+    for (let i = elements.length - 1; i !== -1; i--) {
       tabs.push(
         new TabsObject(elements[i])
       );

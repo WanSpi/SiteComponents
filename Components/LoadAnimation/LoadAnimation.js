@@ -157,13 +157,13 @@
     var elements = e.Target.querySelectorAll('[lanim]');
     var groups = e.Target.querySelectorAll('[lanim-group]');
 
-    for (var i = 0; i !== groups.length; i++) {
+    for (let i = 0; i !== groups.length; i++) {
       appendParent(
         new LoadAnimationGroup(groups[i])
       );
     }
 
-    for (var i = 0; i !== elements.length; i++) {
+    for (let i = 0; i !== elements.length; i++) {
       appendParent(
         new LoadAnimationElement(elements[i])
       );
